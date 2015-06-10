@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a1d5316417f4153aaf1da4f3355c7d7" Name="Diagram1">
+        <EntityTypeShape EntityType="LikeJesusDBModel.BooksContent" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LikeJesusDBModel.Contributor" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="LikeJesusDBModel.PrayerRequest" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LikeJesusDBModel.PrayersContent" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LikeJesusDBModel.UserProfile" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LikeJesusDBModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_BooksContent_Contributor" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_BooksContent_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_Contributor_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_PrayerRequest_Contributor" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_PrayersContent_Contributor" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_PrayerRequest_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.FK_PrayersContent_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="LikeJesusDBModel.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

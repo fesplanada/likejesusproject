@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LikeJesusDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="LikeJesusDBModelStoreContainer">
+          <EntitySet Name="BooksContent" EntityType="LikeJesusDBModel.Store.BooksContent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Contributor" EntityType="LikeJesusDBModel.Store.Contributor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PrayerRequest" EntityType="LikeJesusDBModel.Store.PrayerRequest" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PrayersContent" EntityType="LikeJesusDBModel.Store.PrayersContent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="LikeJesusDBModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="LikeJesusDBModel.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="LikeJesusDBModel.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_BooksContent_Contributor" Association="LikeJesusDBModel.Store.FK_BooksContent_Contributor">
+            <End Role="Contributor" EntitySet="Contributor" />
+            <End Role="BooksContent" EntitySet="BooksContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BooksContent_UserProfile" Association="LikeJesusDBModel.Store.FK_BooksContent_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="BooksContent" EntitySet="BooksContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contributor_UserProfile" Association="LikeJesusDBModel.Store.FK_Contributor_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Contributor" EntitySet="Contributor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayerRequest_Contributor" Association="LikeJesusDBModel.Store.FK_PrayerRequest_Contributor">
+            <End Role="Contributor" EntitySet="Contributor" />
+            <End Role="PrayerRequest" EntitySet="PrayerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayerRequest_UserProfile" Association="LikeJesusDBModel.Store.FK_PrayerRequest_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="PrayerRequest" EntitySet="PrayerRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayersContent_Contributor" Association="LikeJesusDBModel.Store.FK_PrayersContent_Contributor">
+            <End Role="Contributor" EntitySet="Contributor" />
+            <End Role="PrayersContent" EntitySet="PrayersContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayersContent_UserProfile" Association="LikeJesusDBModel.Store.FK_PrayersContent_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="PrayersContent" EntitySet="PrayersContent" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="LikeJesusDBModel.Store.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="LikeJesusDBModel.Store.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BooksContent">
+          <Key>
+            <PropertyRef Name="BooksContentId" />
+          </Key>
+          <Property Name="BooksContentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Book" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ContributorId" Type="int" />
+        </EntityType>
+        <EntityType Name="Contributor">
+          <Key>
+            <PropertyRef Name="ContributorId" />
+          </Key>
+          <Property Name="ContributorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="LastContributionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PrayerRequest">
+          <Key>
+            <PropertyRef Name="PrayerRequestId" />
+          </Key>
+          <Property Name="PrayerRequestId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RequestedDate" Type="datetime" />
+          <Property Name="ContributorId" Type="int" />
+        </EntityType>
+        <EntityType Name="PrayersContent">
+          <Key>
+            <PropertyRef Name="PrayerId" />
+          </Key>
+          <Property Name="PrayerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Prayer" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ContributorId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="tinyint" />
+          <Property Name="Sex" Type="char" MaxLength="10" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="30" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BooksContent_Contributor">
+          <End Role="Contributor" Type="LikeJesusDBModel.Store.Contributor" Multiplicity="0..1" />
+          <End Role="BooksContent" Type="LikeJesusDBModel.Store.BooksContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contributor">
+              <PropertyRef Name="ContributorId" />
+            </Principal>
+            <Dependent Role="BooksContent">
+              <PropertyRef Name="ContributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BooksContent_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.Store.UserProfile" Multiplicity="0..1" />
+          <End Role="BooksContent" Type="LikeJesusDBModel.Store.BooksContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BooksContent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contributor_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.Store.UserProfile" Multiplicity="0..1" />
+          <End Role="Contributor" Type="LikeJesusDBModel.Store.Contributor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Contributor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayerRequest_Contributor">
+          <End Role="Contributor" Type="LikeJesusDBModel.Store.Contributor" Multiplicity="0..1" />
+          <End Role="PrayerRequest" Type="LikeJesusDBModel.Store.PrayerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contributor">
+              <PropertyRef Name="ContributorId" />
+            </Principal>
+            <Dependent Role="PrayerRequest">
+              <PropertyRef Name="ContributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayerRequest_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.Store.UserProfile" Multiplicity="0..1" />
+          <End Role="PrayerRequest" Type="LikeJesusDBModel.Store.PrayerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PrayerRequest">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayersContent_Contributor">
+          <End Role="Contributor" Type="LikeJesusDBModel.Store.Contributor" Multiplicity="0..1" />
+          <End Role="PrayersContent" Type="LikeJesusDBModel.Store.PrayersContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contributor">
+              <PropertyRef Name="ContributorId" />
+            </Principal>
+            <Dependent Role="PrayersContent">
+              <PropertyRef Name="ContributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayersContent_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.Store.UserProfile" Multiplicity="0..1" />
+          <End Role="PrayersContent" Type="LikeJesusDBModel.Store.PrayersContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PrayersContent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="LikeJesusDBModel.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="LikeJesusDBModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="LikeJesusDBModel.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="LikeJesusDBModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LikeJesusDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LikeJesusEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="BooksContents" EntityType="LikeJesusDBModel.BooksContent" />
+          <EntitySet Name="Contributors" EntityType="LikeJesusDBModel.Contributor" />
+          <EntitySet Name="PrayerRequests" EntityType="LikeJesusDBModel.PrayerRequest" />
+          <EntitySet Name="PrayersContents" EntityType="LikeJesusDBModel.PrayersContent" />
+          <EntitySet Name="UserProfiles" EntityType="LikeJesusDBModel.UserProfile" />
+          <EntitySet Name="webpages_Roles" EntityType="LikeJesusDBModel.webpages_Roles" />
+          <AssociationSet Name="FK_BooksContent_Contributor" Association="LikeJesusDBModel.FK_BooksContent_Contributor">
+            <End Role="Contributor" EntitySet="Contributors" />
+            <End Role="BooksContent" EntitySet="BooksContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BooksContent_UserProfile" Association="LikeJesusDBModel.FK_BooksContent_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="BooksContent" EntitySet="BooksContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contributor_UserProfile" Association="LikeJesusDBModel.FK_Contributor_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Contributor" EntitySet="Contributors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayerRequest_Contributor" Association="LikeJesusDBModel.FK_PrayerRequest_Contributor">
+            <End Role="Contributor" EntitySet="Contributors" />
+            <End Role="PrayerRequest" EntitySet="PrayerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayersContent_Contributor" Association="LikeJesusDBModel.FK_PrayersContent_Contributor">
+            <End Role="Contributor" EntitySet="Contributors" />
+            <End Role="PrayersContent" EntitySet="PrayersContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayerRequest_UserProfile" Association="LikeJesusDBModel.FK_PrayerRequest_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="PrayerRequest" EntitySet="PrayerRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrayersContent_UserProfile" Association="LikeJesusDBModel.FK_PrayersContent_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="PrayersContent" EntitySet="PrayersContents" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="LikeJesusDBModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BooksContent">
+          <Key>
+            <PropertyRef Name="BooksContentId" />
+          </Key>
+          <Property Name="BooksContentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Book" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ContributorId" Type="Int32" />
+          <NavigationProperty Name="Contributor" Relationship="LikeJesusDBModel.FK_BooksContent_Contributor" FromRole="BooksContent" ToRole="Contributor" />
+          <NavigationProperty Name="UserProfile" Relationship="LikeJesusDBModel.FK_BooksContent_UserProfile" FromRole="BooksContent" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Contributor">
+          <Key>
+            <PropertyRef Name="ContributorId" />
+          </Key>
+          <Property Name="ContributorId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="LastContributionDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BooksContents" Relationship="LikeJesusDBModel.FK_BooksContent_Contributor" FromRole="Contributor" ToRole="BooksContent" />
+          <NavigationProperty Name="UserProfile" Relationship="LikeJesusDBModel.FK_Contributor_UserProfile" FromRole="Contributor" ToRole="UserProfile" />
+          <NavigationProperty Name="PrayerRequests" Relationship="LikeJesusDBModel.FK_PrayerRequest_Contributor" FromRole="Contributor" ToRole="PrayerRequest" />
+          <NavigationProperty Name="PrayersContents" Relationship="LikeJesusDBModel.FK_PrayersContent_Contributor" FromRole="Contributor" ToRole="PrayersContent" />
+        </EntityType>
+        <EntityType Name="PrayerRequest">
+          <Key>
+            <PropertyRef Name="PrayerRequestId" />
+          </Key>
+          <Property Name="PrayerRequestId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RequestedDate" Type="DateTime" Precision="3" />
+          <Property Name="ContributorId" Type="Int32" />
+          <NavigationProperty Name="Contributor" Relationship="LikeJesusDBModel.FK_PrayerRequest_Contributor" FromRole="PrayerRequest" ToRole="Contributor" />
+          <NavigationProperty Name="UserProfile" Relationship="LikeJesusDBModel.FK_PrayerRequest_UserProfile" FromRole="PrayerRequest" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="PrayersContent">
+          <Key>
+            <PropertyRef Name="PrayerId" />
+          </Key>
+          <Property Name="PrayerId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Prayer" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ContributorId" Type="Int32" />
+          <NavigationProperty Name="Contributor" Relationship="LikeJesusDBModel.FK_PrayersContent_Contributor" FromRole="PrayersContent" ToRole="Contributor" />
+          <NavigationProperty Name="UserProfile" Relationship="LikeJesusDBModel.FK_PrayersContent_UserProfile" FromRole="PrayersContent" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Age" Type="Byte" />
+          <Property Name="Sex" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="Religion" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Nationality" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <NavigationProperty Name="BooksContents" Relationship="LikeJesusDBModel.FK_BooksContent_UserProfile" FromRole="UserProfile" ToRole="BooksContent" />
+          <NavigationProperty Name="Contributors" Relationship="LikeJesusDBModel.FK_Contributor_UserProfile" FromRole="UserProfile" ToRole="Contributor" />
+          <NavigationProperty Name="PrayerRequests" Relationship="LikeJesusDBModel.FK_PrayerRequest_UserProfile" FromRole="UserProfile" ToRole="PrayerRequest" />
+          <NavigationProperty Name="PrayersContents" Relationship="LikeJesusDBModel.FK_PrayersContent_UserProfile" FromRole="UserProfile" ToRole="PrayersContent" />
+          <NavigationProperty Name="webpages_Roles" Relationship="LikeJesusDBModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="LikeJesusDBModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_BooksContent_Contributor">
+          <End Role="Contributor" Type="LikeJesusDBModel.Contributor" Multiplicity="0..1" />
+          <End Role="BooksContent" Type="LikeJesusDBModel.BooksContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contributor">
+              <PropertyRef Name="ContributorId" />
+            </Principal>
+            <Dependent Role="BooksContent">
+              <PropertyRef Name="ContributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BooksContent_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.UserProfile" Multiplicity="0..1" />
+          <End Role="BooksContent" Type="LikeJesusDBModel.BooksContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="BooksContent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contributor_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.UserProfile" Multiplicity="0..1" />
+          <End Role="Contributor" Type="LikeJesusDBModel.Contributor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Contributor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayerRequest_Contributor">
+          <End Role="Contributor" Type="LikeJesusDBModel.Contributor" Multiplicity="0..1" />
+          <End Role="PrayerRequest" Type="LikeJesusDBModel.PrayerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contributor">
+              <PropertyRef Name="ContributorId" />
+            </Principal>
+            <Dependent Role="PrayerRequest">
+              <PropertyRef Name="ContributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayersContent_Contributor">
+          <End Role="Contributor" Type="LikeJesusDBModel.Contributor" Multiplicity="0..1" />
+          <End Role="PrayersContent" Type="LikeJesusDBModel.PrayersContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contributor">
+              <PropertyRef Name="ContributorId" />
+            </Principal>
+            <Dependent Role="PrayersContent">
+              <PropertyRef Name="ContributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayerRequest_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.UserProfile" Multiplicity="0..1" />
+          <End Role="PrayerRequest" Type="LikeJesusDBModel.PrayerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PrayerRequest">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrayersContent_UserProfile">
+          <End Role="UserProfile" Type="LikeJesusDBModel.UserProfile" Multiplicity="0..1" />
+          <End Role="PrayersContent" Type="LikeJesusDBModel.PrayersContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="PrayersContent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="LikeJesusDBModel.webpages_Roles" Multiplicity="*" />
+          <End Role="UserProfile" Type="LikeJesusDBModel.UserProfile" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LikeJesusDBModelStoreContainer" CdmEntityContainer="LikeJesusEntities">
+          <EntitySetMapping Name="BooksContents">
+            <EntityTypeMapping TypeName="LikeJesusDBModel.BooksContent">
+              <MappingFragment StoreEntitySet="BooksContent">
+                <ScalarProperty Name="BooksContentId" ColumnName="BooksContentId" />
+                <ScalarProperty Name="Book" ColumnName="Book" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ContributorId" ColumnName="ContributorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contributors">
+            <EntityTypeMapping TypeName="LikeJesusDBModel.Contributor">
+              <MappingFragment StoreEntitySet="Contributor">
+                <ScalarProperty Name="ContributorId" ColumnName="ContributorId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LastContributionDate" ColumnName="LastContributionDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrayerRequests">
+            <EntityTypeMapping TypeName="LikeJesusDBModel.PrayerRequest">
+              <MappingFragment StoreEntitySet="PrayerRequest">
+                <ScalarProperty Name="PrayerRequestId" ColumnName="PrayerRequestId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RequestedDate" ColumnName="RequestedDate" />
+                <ScalarProperty Name="ContributorId" ColumnName="ContributorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrayersContents">
+            <EntityTypeMapping TypeName="LikeJesusDBModel.PrayersContent">
+              <MappingFragment StoreEntitySet="PrayersContent">
+                <ScalarProperty Name="PrayerId" ColumnName="PrayerId" />
+                <ScalarProperty Name="Prayer" ColumnName="Prayer" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ContributorId" ColumnName="ContributorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="LikeJesusDBModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="LikeJesusDBModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="LikeJesusDBModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
